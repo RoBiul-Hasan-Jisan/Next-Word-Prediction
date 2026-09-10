@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Next Word — predictive writing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="mark">Next Word</div>
+      <p class="tagline">a small tool that finishes your sentence</p>
+    </header>
+
+    <main class="typewriter">
+      <div class="engine-switch" role="tablist" aria-label="Prediction engine">
+        <button class="engine-btn is-active" data-engine="transformer" role="tab" aria-selected="true">
+          Transformer <span class="engine-note">pretrained, fluent</span>
+        </button>
+        <button class="engine-btn" data-engine="lstm" role="tab" aria-selected="false">
+          LSTM <span class="engine-note">your trained model</span>
+        </button>
+      </div>
+
+      <div class="paper">
+        <textarea
+          id="inputText"
+          placeholder="Start typing…"
+          spellcheck="false"
+          autofocus
+        ></textarea>
+      </div>
+
+      <div id="suggestionRail" class="rail" aria-live="polite">
+        <p class="rail-empty">Suggestions will line up here as you type.</p>
+      </div>
+
+      <p class="hint">
+        <kbd>space</kbd> refreshes suggestions &nbsp;·&nbsp; <kbd>tab</kbd> inserts the top word &nbsp;·&nbsp; click any key below to insert it
+      </p>
+
+      <p id="errorBox" class="error-box" hidden></p>
+    </main>
+
+    <footer class="colophon">
+      Two engines, one API — a from-scratch LSTM you train yourself, and a pretrained transformer that works immediately.
+    </footer>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

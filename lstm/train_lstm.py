@@ -10,7 +10,6 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout, Embedding
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.utils import to_categorical
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "model")
 
@@ -59,7 +58,10 @@ def build_model(vocab_size: int, seq_len: int, embedding_dim: int = 100):
             Dense(vocab_size, activation="softmax"),
         ]
     )
-    model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+    # sparse_categorical_crossentropy keeps labels as plain integers (shape
+    # [N]) instead of one-hot vectors (shape [N, vocab_size]), which avoids
+    # allocating a huge one-hot array for large corpora/vocabularies.
+    model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
     return model
 
 
@@ -82,7 +84,6 @@ def main():
     print("Building training sequences (this can take a minute for large corpora)...")
     X, y, tokenizer, max_len = build_sequences(text, args.num_words, args.max_seq_len)
     vocab_size = min(args.num_words, len(tokenizer.word_index) + 1) + 1
-    y = to_categorical(y, num_classes=vocab_size)
     print(f"Training samples: {X.shape[0]}, sequence length: {max_len}, vocab size: {vocab_size}")
 
     model = build_model(vocab_size, X.shape[1], args.embedding_dim)

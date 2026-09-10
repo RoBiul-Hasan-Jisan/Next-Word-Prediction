@@ -2,10 +2,10 @@ fastapi
 uvicorn[standard]
 pydantic
 
-
+# LSTM engine (train_lstm.py / predict_lstm.py)
 tensorflow>=2.15
 numpy
 
-
+# Transformer engine (predict_transformer.py)
 torch
 transformers
