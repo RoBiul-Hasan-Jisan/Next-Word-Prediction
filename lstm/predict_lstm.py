@@ -1,17 +1,3 @@
-"""
-predict_lstm.py
-----------------
-Loads the trained LSTM model (from train_lstm.py) and predicts the top-k
-most likely next words given some input text.
-
-Can be used standalone:
-    python predict_lstm.py "to be or not to"
-
-Or imported:
-    from predict_lstm import LSTMPredictor
-    p = LSTMPredictor()
-    p.predict("to be or not to", top_k=5)
-"""
 import json
 import os
 import pickle
