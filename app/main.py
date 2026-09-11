@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "lstm"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "transformer"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "gpt"))
 
 app = FastAPI(title="Next Word Prediction API")
 
@@ -27,6 +28,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 # the two models isn't ready / isn't trained yet.
 _lstm_predictor = None
 _transformer_predictor = None
+_gpt_predictor = None
 
 
 def get_lstm_predictor():
@@ -45,6 +47,15 @@ def get_transformer_predictor():
 
         _transformer_predictor = TransformerPredictor()
     return _transformer_predictor
+
+
+def get_gpt_predictor():
+    global _gpt_predictor
+    if _gpt_predictor is None:
+        from predict import GPTPredictor
+
+        _gpt_predictor = GPTPredictor()
+    return _gpt_predictor
 
 
 class PredictRequest(BaseModel):
@@ -67,6 +78,8 @@ async def predict(req: PredictRequest):
     try:
         if req.engine == "lstm":
             predictor = get_lstm_predictor()
+        elif req.engine == "gpt":
+            predictor = get_gpt_predictor()
         else:
             predictor = get_transformer_predictor()
         suggestions = predictor.predict(text, top_k=req.top_k)

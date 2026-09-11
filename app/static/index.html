@@ -21,6 +21,9 @@
         <button class="engine-btn is-active" data-engine="transformer" role="tab" aria-selected="true">
           Transformer <span class="engine-note">pretrained, fluent</span>
         </button>
+        <button class="engine-btn" data-engine="gpt" role="tab" aria-selected="false">
+          GPT (scratch) <span class="engine-note">RoPE·SwiGLU·GQA, int8</span>
+        </button>
         <button class="engine-btn" data-engine="lstm" role="tab" aria-selected="false">
           LSTM <span class="engine-note">your trained model</span>
         </button>
@@ -47,7 +50,7 @@
     </main>
 
     <footer class="colophon">
-      Two engines, one API — a from-scratch LSTM you train yourself, and a pretrained transformer that works immediately.
+      Three engines, one API — a from-scratch modern transformer (RoPE, SwiGLU, grouped-query attention, shipped as a quantized int8 checkpoint), a from-scratch LSTM, and a pretrained transformer that works immediately.
     </footer>
   </div>
 
