@@ -1,3 +1,13 @@
+/* ---------------------------------------------------------------------
+   Palette
+   bg-deep   #1B1E2B  near-navy charcoal, the "page at night"
+   bg-panel  #242940  slightly lifted panel
+   ink       #EDE9DF  warm paper-white text
+   ink-dim   #9AA0B4  muted secondary text
+   amber     #E0A458  ribbon-ink accent (primary)
+   sage      #7FA184  probability / secondary accent
+   line      #384166  hairline borders
+--------------------------------------------------------------------- */
 :root {
   --bg-deep: #1b1e2b;
   --bg-panel: #232840;

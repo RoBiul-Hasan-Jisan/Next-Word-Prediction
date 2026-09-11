@@ -9,3 +9,6 @@ numpy
 # Transformer engine (predict_transformer.py)
 torch
 transformers
+
+# GPT engine -- modern from-scratch decoder transformer (gpt/)
+tokenizers
